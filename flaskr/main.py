@@ -1,6 +1,7 @@
 from joblib import load
 from flask import Flask
-from .predictionModel import make_predictions  # Import predict function from model.py
+from .model import predict # Import predict function from model.py
+
 
 '''
 Initiate a new flaskr app
@@ -15,14 +16,15 @@ from flask import (
     redirect, render_template, request, session, url_for
 )
 
+
 '''
 Load the machine learning libraries 
 1. Logistic regression model is used to predict the sentiment on the newly computed matrix
 '''
 
 # Load the machine learning model
-with open('./flaskr/static/pipeline_proyecto2.joblib', 'rb') as input_file:
-    model = load(input_file)
+model = load("assets/pipeline_proyecto2.joblib")
+
 
 '''
 Home Page
@@ -33,8 +35,6 @@ Home Page
     so that it can be reused throughout the session
     b) The page will then be redirected to /result page
 '''
-
-
 @app.route('/', methods=('GET', 'POST'))
 def index():
     if request.method == 'POST':
@@ -57,14 +57,12 @@ Result Page
     so that it can be reused throughout the session
     c) The page will then be redirected to /result page
 '''
-
-
 @app.route('/result', methods=('GET', 'POST'))
 def result():
     message = session.get('message')
-    df_pred = make_predictions(predictionModel=model, text=message)
-    sentiment = df_pred
-    score = 0.66
+    df_pred = predict(model=model, text=message)
+    sentiment = df_pred.head(1)['label'].values[0]
+    score = df_pred.head(1)['score'].values[0]
     if request.method == 'POST':
         message = request.form['message']
         if message is not None:
