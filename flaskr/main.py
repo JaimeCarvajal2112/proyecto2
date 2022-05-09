@@ -24,8 +24,7 @@ Load the machine learning libraries
 '''
 
 # Load the machine learning model
-with open('./flaskr/static/pipeline_proyecto2.joblib', 'rb') as input_file:
-    model = load(input_file)
+model = load('./flaskr/static/pipeline_proyecto2.joblib')
 
 
 '''
