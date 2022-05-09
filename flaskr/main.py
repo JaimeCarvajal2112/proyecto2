@@ -1,6 +1,6 @@
 from joblib import load
 from flask import Flask
-from .model import predict # Import predict function from model.py
+from .predictionModel import make_predictions # Import predict function from model.py
 
 
 '''
@@ -61,8 +61,8 @@ Result Page
 @app.route('/result', methods=('GET', 'POST'))
 def result():
     message = session.get('message')
-    df_pred = predict(model=model, text=message)
-    sentiment = 'aylmao'
+    df_pred = make_predictions(predictionModel=model, text=message)
+    sentiment = df_pred
     score = 0.66
     if request.method == 'POST':
         message = request.form['message']
