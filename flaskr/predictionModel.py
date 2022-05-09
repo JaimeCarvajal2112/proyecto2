@@ -8,6 +8,10 @@ def __init__(self):
 
 def make_predictions(predictionModel, data):
     result = predictionModel.model.predict(data)
+    if result == 1:
+        result = "Yes"
+    else:
+        result = "No"
     return result
 
 
