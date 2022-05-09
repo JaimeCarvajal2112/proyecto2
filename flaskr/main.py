@@ -23,7 +23,7 @@ Load the machine learning libraries
 '''
 
 # Load the machine learning model
-model = load("assets/pipeline_proyecto2.joblib")
+model = load("static/pipeline_proyecto2.joblib")
 
 
 '''
