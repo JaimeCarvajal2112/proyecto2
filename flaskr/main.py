@@ -62,8 +62,8 @@ Result Page
 def result():
     message = session.get('message')
     df_pred = predict(model=model, text=message)
-    sentiment = df_pred.head(1)['sentiment'].values[0]
-    score = df_pred.head(1)['score'].values[0]
+    sentiment = df_pred.head(1)['label'].values[0]
+    score = 0.66
     if request.method == 'POST':
         message = request.form['message']
         if message is not None:
