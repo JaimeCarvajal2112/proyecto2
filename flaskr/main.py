@@ -1,4 +1,4 @@
-from joblib import load
+import pickle
 from flask import Flask
 from .model import predict # Import predict function from model.py
 
@@ -24,7 +24,7 @@ Load the machine learning libraries
 
 # Load the machine learning model
 with open('./flaskr/static/LogisticRegression.pickle', 'rb') as input_file:
-    model = load(input_file)
+    model = pickle.load(input_file)
 
 
 '''
@@ -62,7 +62,7 @@ Result Page
 def result():
     message = session.get('message')
     df_pred = predict(model=model, text=message)
-    sentiment = df_pred.head(1)['label'].values[0]
+    sentiment = df_pred.head(1)['sentiment'].values[0]
     score = df_pred.head(1)['score'].values[0]
     if request.method == 'POST':
         message = request.form['message']
