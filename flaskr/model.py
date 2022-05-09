@@ -66,9 +66,8 @@ Predict the sentiment of message, return a dataframe with columns : text, sentim
 
 
 def predict(model, text, vectoriser=HashingVectorizer(ngram_range=(1, 2))):
-    textdata = vectoriser.transform([preprocess(text)])
-    sentiment = model.predict(textdata)
-    score = round(np.amax(model.predict_proba(textdata)), 3)
+    sentiment = model.predict(text)
+    score = round(np.amax(model.predict_proba(text)), 3)
 
     data = [(text, sentiment, score)]
     df = pd.DataFrame(data, columns=['text', 'sentiment', 'score'])
