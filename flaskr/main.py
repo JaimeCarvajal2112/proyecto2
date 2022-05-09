@@ -1,4 +1,4 @@
-import pickle
+from joblib import load
 from flask import Flask
 from .model import predict # Import predict function from model.py
 
@@ -24,7 +24,7 @@ Load the machine learning libraries
 
 # Load the machine learning model
 with open('./flaskr/static/pipeline_proyecto2.joblib', 'rb') as input_file:
-    model = pickle.load(input_file)
+    model = load(input_file)
 
 
 '''
